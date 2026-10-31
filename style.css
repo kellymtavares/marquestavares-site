@@ -1,0 +1,315 @@
+/* Marques Tavares Advocacia — folha de estilo
+   Identidade: bloco marinho com faixa gelo (símbolo MT), cantos retos, Inter. */
+
+@view-transition { navigation: auto; }
+
+:root {
+  --marinho: #1F3864;
+  --marinho-escuro: #142545;
+  --gelo: #D9E2F3;
+  --azul-medio: #4472C4;
+  --branco: #FFFFFF;
+  --papel: #F5F7FB;
+  --tinta: #1C2230;
+  --cinza: #5A6478;
+  --linha: #D5DBE6;
+
+  --fonte: "Inter", "Segoe UI", system-ui, sans-serif;
+  --medida: 66ch;
+  --largura: 1160px;
+  --suave: cubic-bezier(.2, .8, .2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--branco);
+  color: var(--tinta);
+  font-family: var(--fonte);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--azul-medio); text-underline-offset: 3px; }
+a:hover { color: var(--marinho); }
+
+:focus-visible { outline: 3px solid var(--azul-medio); outline-offset: 3px; }
+
+.pular { position: absolute; left: -999px; top: 8px; background: var(--marinho); color: #fff; padding: 8px 14px; z-index: 20; }
+.pular:focus { left: 16px; }
+
+.conteiner { width: 100%; max-width: var(--largura); margin: 0 auto; padding: 0 24px; }
+
+/* ---------- Tipografia ---------- */
+h1, h2, h3 { font-weight: 800; letter-spacing: -0.02em; line-height: 1.08; margin: 0 0 0.5em; color: var(--marinho); }
+h1 { font-size: clamp(2.3rem, 5.4vw, 4rem); }
+h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); }
+h3 { font-size: 1.3rem; letter-spacing: -0.01em; }
+p { margin: 0 0 1em; max-width: var(--medida); }
+.lead { font-size: 1.2rem; color: var(--cinza); }
+.rotulo { font-size: .8rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--marinho); }
+
+/* ---------- Cabeçalho ---------- */
+.topo {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(255, 255, 255, .92);
+  backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--linha);
+  view-transition-name: topo;
+}
+.topo .conteiner { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 76px; }
+.marca img { height: 44px; width: auto; }
+.menu { display: flex; align-items: center; gap: 26px; }
+.menu a { color: var(--tinta); text-decoration: none; font-size: .95rem; font-weight: 500; position: relative; }
+.menu a:not(.botao)::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 3px; background: var(--gelo);
+  transform: scaleX(0); transform-origin: left; transition: transform .3s var(--suave);
+}
+.menu a:not(.botao):hover::after, .menu a[aria-current="page"]::after { transform: scaleX(1); }
+.menu a[aria-current="page"] { color: var(--marinho); }
+
+/* barra de leitura: avança conforme a rolagem (navegadores que suportam) */
+.progresso { position: absolute; left: 0; bottom: -1px; height: 3px; width: 100%; background: var(--azul-medio); transform-origin: left; transform: scaleX(0); }
+@supports (animation-timeline: scroll()) {
+  .progresso { animation: progresso linear both; animation-timeline: scroll(root); }
+  @keyframes progresso { to { transform: scaleX(1); } }
+}
+
+/* ---------- Botões ---------- */
+.botao {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--marinho); color: #fff; border: 2px solid var(--marinho);
+  font: 600 1rem/1 var(--fonte); padding: 16px 24px; text-decoration: none;
+  position: relative; overflow: hidden; isolation: isolate;
+  transition: color .3s var(--suave), border-color .3s var(--suave);
+}
+.botao::before {
+  content: ""; position: absolute; inset: 0; background: var(--marinho-escuro); z-index: -1;
+  transform: translateY(101%); transition: transform .35s var(--suave);
+}
+.botao:hover { color: #fff; }
+.botao:hover::before { transform: translateY(0); }
+.botao svg { width: 20px; height: 20px; flex: none; }
+.botao-sec { background: transparent; color: var(--marinho); }
+.botao-sec::before { background: var(--gelo); }
+.botao-sec:hover { color: var(--marinho); border-color: var(--marinho); }
+.menu .botao { padding: 11px 18px; font-size: .92rem; color: #fff; }
+
+/* ---------- Abertura: a sequência de entrada ---------- */
+.abertura { padding: 64px 0 96px; overflow: hidden; }
+.abertura .conteiner { display: grid; grid-template-columns: 1.1fr .9fr; gap: 64px; align-items: center; }
+.abertura h1 { margin-bottom: .4em; font-size: clamp(2.2rem, 5.4vw, 3.8rem); white-space: nowrap; }
+.abertura h1 .linha { display: block; overflow: hidden; padding-bottom: .06em; }
+.abertura h1 .linha > span { display: inline-block; }
+.abertura .acoes { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+.abertura .nota { font-size: .92rem; color: var(--cinza); margin-top: 20px; }
+
+/* Retrato montado como o símbolo: bloco marinho, foto, faixa gelo */
+.retrato { position: relative; margin: 0; aspect-ratio: 4 / 5; max-width: 460px; justify-self: end; width: 100%; }
+.retrato .bloco { position: absolute; inset: 28px -28px -28px 28px; background: var(--marinho); }
+.retrato .foto { position: absolute; inset: 0; overflow: hidden; }
+.retrato .foto img { width: 100%; height: 100%; object-fit: cover; }
+.retrato .faixa { position: absolute; left: 28px; right: -28px; bottom: -28px; height: 20px; background: var(--gelo); }
+.retrato figcaption {
+  position: absolute; left: -24px; bottom: 40px; background: var(--branco); padding: 14px 18px;
+  box-shadow: 0 18px 40px -20px rgba(20, 37, 69, .45); font-size: .88rem; line-height: 1.35; color: var(--cinza);
+}
+.retrato figcaption strong { display: block; color: var(--marinho); font-size: 1rem; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .anima .linha > span { animation: sobe .9s var(--suave) both; }
+  .anima .linha:nth-child(2) > span { animation-delay: .12s; }
+  .anima .linha:nth-child(3) > span { animation-delay: .24s; }
+  .anima .linha:nth-child(4) > span { animation-delay: .36s; }
+  .anima .lead, .anima .acoes, .anima .nota { animation: aparece .8s var(--suave) both; animation-delay: .45s; }
+  .anima .acoes { animation-delay: .55s; }
+  .anima .nota { animation-delay: .65s; }
+  .anima .bloco { animation: ergue .8s var(--suave) both; animation-delay: .15s; transform-origin: bottom; }
+  .anima .foto { animation: revela 1.1s var(--suave) both; animation-delay: .45s; }
+  .anima .foto img { animation: aproxima 1.6s var(--suave) both; animation-delay: .45s; }
+  .anima .faixa { animation: estende .7s var(--suave) both; animation-delay: 1.15s; transform-origin: left; }
+  .anima figcaption { animation: aparece .7s var(--suave) both; animation-delay: 1.35s; }
+
+  @keyframes sobe { from { transform: translateY(105%); } to { transform: none; } }
+  @keyframes aparece { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @keyframes ergue { from { transform: scaleY(0); } to { transform: none; } }
+  @keyframes revela { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0); } }
+  @keyframes aproxima { from { transform: scale(1.15); } to { transform: none; } }
+  @keyframes estende { from { transform: scaleX(0); } to { transform: none; } }
+
+  /* transição entre páginas: o conteúdo desliza, o cabeçalho fica parado */
+  ::view-transition-old(root) { animation: .28s var(--suave) both sai; }
+  ::view-transition-new(root) { animation: .42s var(--suave) both entra; }
+  @keyframes sai { to { opacity: 0; transform: translateY(-12px); } }
+  @keyframes entra { from { opacity: 0; transform: translateY(18px); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}
+
+/* ---------- Seções ---------- */
+.secao { padding: 96px 0; }
+.secao-papel { background: var(--papel); }
+.secao-marinho { background: var(--marinho); color: #fff; }
+.secao-marinho h2, .secao-marinho h3 { color: #fff; }
+.secao-marinho p, .secao-marinho .intro-secao p { color: #C9D3E8; }
+.secao-marinho .rotulo { color: var(--gelo); }
+.intro-secao { margin-bottom: 48px; max-width: 720px; }
+.intro-secao .rotulo { margin-bottom: 14px; display: block; }
+.intro-secao p { color: var(--cinza); }
+
+/* Fases da vida — uma sequência real, por isso numerada */
+.fases { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 3px solid var(--marinho); counter-reset: fase; }
+.fases li { counter-increment: fase; padding: 28px 24px 32px 0; position: relative; }
+.fases li + li { padding-left: 24px; border-left: 1px solid var(--linha); }
+.fases li::before {
+  content: "0" counter(fase); display: block; font-size: .8rem; font-weight: 500; letter-spacing: .2em; color: var(--azul-medio); margin-bottom: 18px;
+}
+.fases .verbo { display: block; font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; color: var(--marinho); line-height: 1; margin-bottom: 10px; }
+.fases h3 { font-size: 1.05rem; color: var(--tinta); margin-bottom: 8px; }
+.fases p { font-size: .97rem; color: var(--cinza); margin-bottom: 18px; }
+.fases a { font-weight: 600; color: var(--marinho); text-decoration: none; border-bottom: 3px solid var(--gelo); transition: border-color .25s; }
+.fases a:hover { border-color: var(--azul-medio); }
+
+/* Como funciona */
+.como { display: grid; grid-template-columns: .9fr 1.1fr; gap: 64px; align-items: start; }
+.como-foto { position: relative; }
+.como-foto img { width: 100%; aspect-ratio: 6 / 5; object-fit: cover; }
+.como-foto::after { content: ""; position: absolute; left: 0; right: 0; bottom: -14px; height: 14px; background: var(--gelo); }
+.passos { list-style: none; margin: 0; padding: 0; counter-reset: passo; }
+.passos li { counter-increment: passo; display: grid; grid-template-columns: 56px 1fr; gap: 0 20px; padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,.18); }
+.passos li:first-child { padding-top: 0; }
+.passos li::before {
+  content: counter(passo); grid-row: span 2; width: 56px; height: 56px; display: grid; place-items: center;
+  background: var(--branco); color: var(--marinho); font-weight: 800; font-size: 1.4rem; box-shadow: inset 0 -6px 0 var(--gelo);
+}
+.passos h3 { margin: 4px 0 4px; font-size: 1.15rem; }
+.passos p { margin: 0; font-size: .98rem; }
+
+/* Comparativo */
+.tabela-rolagem { overflow-x: auto; }
+.comparativo { width: 100%; min-width: 600px; border-collapse: collapse; font-size: .98rem; }
+.comparativo th, .comparativo td { text-align: left; padding: 18px 20px; border-bottom: 1px solid var(--linha); vertical-align: top; }
+.comparativo thead th { font-size: 1.05rem; font-weight: 800; color: var(--marinho); border-bottom: 3px solid var(--marinho); }
+.comparativo thead th:nth-child(2) { background: var(--gelo); }
+.comparativo tbody td:nth-child(2) { background: rgba(217, 226, 243, .45); }
+.comparativo tbody th { font-weight: 600; color: var(--cinza); width: 22%; }
+.rodape-tabela { font-size: .9rem; color: var(--cinza); margin-top: 16px; }
+
+/* Sobre */
+.sobre { display: grid; grid-template-columns: .8fr 1.2fr; gap: 64px; align-items: center; }
+.selo-nome { background: var(--marinho); color: #fff; padding: 40px; position: relative; }
+.selo-nome::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 14px; background: var(--gelo); }
+.selo-nome strong { display: block; font-size: 1.6rem; font-weight: 800; letter-spacing: -0.01em; line-height: 1.15; }
+.selo-nome span { display: block; margin-top: 10px; color: #C9D3E8; font-size: .95rem; }
+.credenciais { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 12px; }
+.credenciais li { padding-left: 28px; position: relative; }
+.credenciais li::before { content: ""; position: absolute; left: 0; top: .5em; width: 12px; height: 12px; background: var(--marinho); box-shadow: inset 0 -3px 0 var(--gelo); }
+
+/* Foto da seção Sobre: mesma assinatura visual do símbolo */
+.sobre-foto { margin: 0 28px 28px 0; position: relative; max-width: 420px; }
+.sobre-foto::before { content: ""; position: absolute; inset: 28px -28px -28px 28px; background: var(--marinho); z-index: 0; box-shadow: inset 0 -14px 0 var(--gelo); }
+.sobre-foto img { position: relative; z-index: 1; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.sobre-foto figcaption { position: absolute; z-index: 2; right: -12px; bottom: 36px; background: var(--branco); padding: 12px 16px; font-size: .86rem; color: var(--cinza); box-shadow: 0 18px 40px -20px rgba(20, 37, 69, .45); }
+.sobre-foto figcaption strong { display: block; color: var(--marinho); font-size: .98rem; }
+
+/* Perguntas */
+.perguntas { max-width: 860px; }
+.perguntas details { border-bottom: 1px solid var(--linha); }
+.perguntas details:first-child { border-top: 1px solid var(--linha); }
+.perguntas summary { cursor: pointer; list-style: none; padding: 22px 48px 22px 0; position: relative; font-size: 1.12rem; font-weight: 600; color: var(--marinho); }
+.perguntas summary::-webkit-details-marker { display: none; }
+.perguntas summary::after {
+  content: ""; position: absolute; right: 6px; top: 50%; width: 16px; height: 16px; margin-top: -8px;
+  background: linear-gradient(var(--marinho), var(--marinho)) center / 16px 2px no-repeat, linear-gradient(var(--marinho), var(--marinho)) center / 2px 16px no-repeat;
+  transition: transform .3s var(--suave);
+}
+.perguntas details[open] summary::after { transform: rotate(135deg); }
+.perguntas details > div { padding: 0 0 24px; color: var(--cinza); }
+.perguntas details[open] > div { animation: aparece .4s var(--suave); }
+
+/* Contato */
+.contato { display: grid; grid-template-columns: 1.2fr .8fr; gap: 64px; align-items: center; }
+.contato-dados { border: 1px solid rgba(255,255,255,.25); padding: 32px; }
+.contato-dados p { margin: 0 0 16px; color: #fff; }
+.contato-dados a { color: #fff; }
+.contato-dados span { display: block; font-size: .82rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gelo); margin-bottom: 2px; }
+.secao-marinho .botao { background: var(--branco); color: var(--marinho); border-color: var(--branco); }
+.secao-marinho .botao::before { background: var(--gelo); }
+.secao-marinho .botao:hover { color: var(--marinho); }
+
+/* ---------- Páginas de serviço ---------- */
+.migalha { font-size: .9rem; color: var(--cinza); padding-top: 32px; }
+.migalha a { color: var(--cinza); }
+.cab-servico { padding: 24px 0 72px; border-bottom: 1px solid var(--linha); }
+.cab-servico h1 { max-width: 18ch; }
+.cab-servico .rotulo { display: block; margin-bottom: 18px; }
+.colunas { display: grid; grid-template-columns: 1.35fr .65fr; gap: 64px; align-items: start; }
+.texto h2 { margin-top: 1.6em; font-size: clamp(1.5rem, 2.6vw, 1.9rem); }
+.texto h2:first-child { margin-top: 0; }
+.texto ul { padding-left: 1.2em; margin: 0 0 1.2em; max-width: var(--medida); }
+.texto li { margin-bottom: 8px; }
+.lateral { position: sticky; top: 104px; background: var(--marinho); color: #fff; padding: 32px 28px 46px; }
+.lateral::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 14px; background: var(--gelo); }
+.lateral h3 { color: #fff; font-size: 1.3rem; }
+.lateral p { font-size: .95rem; color: #C9D3E8; }
+.lateral .botao { width: 100%; justify-content: center; background: #fff; color: var(--marinho); border-color: #fff; }
+.lateral .botao::before { background: var(--gelo); }
+.lateral .botao:hover { color: var(--marinho); }
+.checklist { list-style: none; padding: 0; margin: 0 0 1.4em; }
+.checklist li { padding: 12px 0 12px 34px; border-bottom: 1px solid var(--linha); position: relative; max-width: var(--medida); }
+.checklist li::before { content: ""; position: absolute; left: 4px; top: 19px; width: 14px; height: 8px; border-left: 3px solid var(--azul-medio); border-bottom: 3px solid var(--azul-medio); transform: rotate(-45deg); }
+.regimes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 3px solid var(--marinho); margin: 0 0 1.4em; }
+.regimes div { padding: 20px 20px 20px 0; border-bottom: 1px solid var(--linha); }
+.regimes div:nth-child(even) { padding-left: 20px; border-left: 1px solid var(--linha); }
+.regimes strong { display: block; color: var(--marinho); margin-bottom: 4px; }
+.regimes p { margin: 0; font-size: .95rem; color: var(--cinza); }
+
+/* ---------- Rodapé ---------- */
+.rodape { background: var(--marinho-escuro); color: #C9D3E8; padding: 56px 0 32px; font-size: .92rem; }
+.rodape .conteiner { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; }
+.rodape img { height: 46px; width: auto; margin-bottom: 18px; }
+.rodape a { color: #fff; }
+.rodape strong { color: #fff; font-weight: 600; }
+.rodape p { margin: 0 0 8px; }
+.rodape .legal { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,.15); padding-top: 22px; font-size: .82rem; color: #9FB0CF; }
+
+.whats {
+  position: fixed; right: 20px; bottom: 20px; z-index: 9; width: 58px; height: 58px;
+  background: var(--marinho); color: #fff; display: grid; place-items: center;
+  box-shadow: inset 0 -6px 0 var(--gelo), 0 12px 24px -10px rgba(20, 37, 69, .6);
+  transition: transform .25s var(--suave);
+  view-transition-name: whats;
+}
+.whats:hover { transform: translateY(-3px); color: #fff; }
+.whats svg { width: 26px; height: 26px; margin-top: -4px; }
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 960px) {
+  .abertura .conteiner, .sobre, .contato, .colunas, .como { grid-template-columns: 1fr; gap: 48px; }
+  .retrato { justify-self: start; max-width: 380px; margin-right: 28px; }
+  .fases { grid-template-columns: 1fr 1fr; }
+  .fases li:nth-child(3) { padding-left: 0; border-left: 0; }
+  .fases li:nth-child(n+3) { border-top: 1px solid var(--linha); }
+  .rodape .conteiner { grid-template-columns: 1fr; }
+  .lateral { position: relative; top: 0; }
+  .secao { padding: 72px 0; }
+  .menu .link-sec { display: none; }
+}
+@media (max-width: 560px) {
+  .conteiner { padding: 0 16px; }
+  .marca img { height: 36px; }
+  .menu .botao { padding: 10px 14px; font-size: .85rem; }
+  .abertura { padding: 40px 0 80px; }
+  .fases { grid-template-columns: 1fr; }
+  .fases li, .fases li + li { padding: 24px 0; border-left: 0; }
+  .fases li + li { border-top: 1px solid var(--linha); }
+  .regimes { grid-template-columns: 1fr; }
+  .regimes div:nth-child(even) { padding-left: 0; border-left: 0; }
+  .retrato figcaption { left: 12px; }
+}

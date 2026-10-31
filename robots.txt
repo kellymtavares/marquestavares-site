@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://marquestavares.com.br/sitemap.xml
