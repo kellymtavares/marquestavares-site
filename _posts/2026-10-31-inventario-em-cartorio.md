@@ -1,5 +1,7 @@
 ---
 title: "Inventário em cartório: quando dá para fazer sem processo"
+imagem: /img/blog/inventario-em-cartorio.jpg
+imagem_descricao: "Ilustração de uma casa dividida em partes"
 description: "Quem pode fazer, o que é preciso e por que costuma ser mais rápido que o inventário na Justiça."
 ---
 

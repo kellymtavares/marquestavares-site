@@ -11,7 +11,7 @@ Tempo estimado: 30 minutos, mais a espera do domínio (de minutos até 24 horas)
 ## 2. Enviar os arquivos
 
 1. Na página do repositório, clique em **uploading an existing file**.
-2. Arraste **todos os arquivos desta pasta** (não a pasta em si): `index.html`, `casamento.html`, `inventario.html`, `divorcio.html`, `analise-pre-compra-de-imovel.html`, `style.css`, `favicon.svg`, `CNAME`, `robots.txt`, `sitemap.xml` e a pasta `img` inteira.
+2. Arraste **todos os arquivos desta pasta** (não a pasta em si): `index.html`, `casamento.html`, `inventario.html`, `divorcio.html`, `analise-pre-compra-de-imovel.html`, `style.css`, `favicon.svg`, `CNAME`, `robots.txt`, `sitemap.xml`, `_config.yml`, `COMO-ESCREVER-NO-BLOG.md` e as pastas `img`, `blog`, `_layouts` e `_posts` inteiras.
 3. Clique em **Commit changes**.
 
 ## 3. Ligar o GitHub Pages
@@ -47,3 +47,8 @@ Quando o GitHub confirmar o domínio em **Settings → Pages**, marque **Enforce
 ## Para alterar textos depois
 
 No GitHub, abra o arquivo `.html`, clique no lápis (**Edit**), altere o texto entre as tags e clique em **Commit changes**. O site atualiza em 1 a 2 minutos.
+
+
+## Para atualizar o site
+
+No repositório, clique em **Add file → Upload files**, arraste os arquivos ou pastas que mudaram e clique em **Commit changes**. Arquivos com o mesmo nome são substituídos. Para escrever no blog, veja `COMO-ESCREVER-NO-BLOG.md`.

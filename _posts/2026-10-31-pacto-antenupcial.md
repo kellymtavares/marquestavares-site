@@ -1,5 +1,7 @@
 ---
 title: "Pacto antenupcial: o que é e por que conversar sobre isso antes do casamento"
+imagem: /img/blog/pacto-antenupcial.jpg
+imagem_descricao: "Ilustração de dois quadrados entrelaçados"
 description: "Como o regime de bens afeta o patrimônio do casal e quando vale a pena fazer um pacto."
 ---
 
