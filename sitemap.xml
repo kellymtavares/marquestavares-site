@@ -9,6 +9,7 @@ permalink: /sitemap.xml
   <url><loc>{{ site.url }}/analise-pre-compra-de-imovel.html</loc></url>
   <url><loc>{{ site.url }}/divorcio.html</loc></url>
   <url><loc>{{ site.url }}/inventario.html</loc></url>
+  <url><loc>{{ site.url }}/outras-areas.html</loc></url>
   <url><loc>{{ site.url }}/blog/</loc></url>
   {% for post in site.posts %}<url><loc>{{ site.url }}{{ post.url }}</loc><lastmod>{{ post.date | date: '%Y-%m-%d' }}</lastmod></url>
   {% endfor %}

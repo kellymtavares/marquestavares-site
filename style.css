@@ -360,3 +360,21 @@ p { margin: 0 0 1em; max-width: var(--medida); }
 .post-aviso .botao + .botao { background: transparent; color: #fff; border-color: rgba(255,255,255,.6); }
 .post-aviso .botao + .botao::before { background: rgba(255,255,255,.12); }
 .post-aviso .botao + .botao:hover { color: #fff; }
+
+/* Outras áreas: discreta, abaixo das fases */
+#outras-areas { padding: 64px 0 72px; }
+#outras-areas h2 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); }
+.outras { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--linha); }
+.outras a { display: block; padding: 24px 24px 24px 0; text-decoration: none; color: inherit; }
+.outras a + a { padding-left: 24px; border-left: 1px solid var(--linha); }
+.outras h3 { font-size: 1.1rem; margin-bottom: 6px; }
+.outras p { margin: 0; font-size: .95rem; color: var(--cinza); }
+.outras a:hover h3 { color: var(--azul-medio); }
+@media (max-width: 760px) {
+  .outras { grid-template-columns: 1fr; }
+  .outras a, .outras a + a { padding: 20px 0; border-left: 0; border-bottom: 1px solid var(--linha); }
+}
+.texto h2[id] { scroll-margin-top: 100px; }
+
+.outras-nota { margin: 20px 0 0; font-size: .95rem; color: var(--cinza); }
+.outras-nota a { font-weight: 600; color: var(--marinho); }
