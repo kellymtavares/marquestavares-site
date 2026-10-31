@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}Blog Marques Tavares Advocacia</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta property="og:title" content="{{ page.title | default: 'Blog Marques Tavares Advocacia' }}">
+  <meta property="og:description" content="{{ page.description | default: site.description }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:image" content="{{ site.url }}/img/kelly-retrato.jpg">
+  <meta property="og:locale" content="pt_BR">
+  <meta name="theme-color" content="#1F3864">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <div class="conteiner">
+      <a class="marca" href="/" aria-label="Marques Tavares Advocacia, página inicial"><img src="/img/logo-horizontal.svg" alt="Marques Tavares Advocacia" width="180" height="44"></a>
+      <nav class="menu" aria-label="Principal">
+        <a class="link-sec" href="/casamento.html">Casamento</a>
+        <a class="link-sec" href="/analise-pre-compra-de-imovel.html">Compra de imóvel</a>
+        <a class="link-sec" href="/divorcio.html">Divórcio</a>
+        <a class="link-sec" href="/inventario.html">Inventário</a>
+        <a class="link-sec" href="/blog/" aria-current="page">Blog</a>
+        <a class="botao" href="https://wa.me/5511993757015?text=Ol%C3%A1%2C%20Dra.%20Kelly!%20Vim%20pelo%20site." target="_blank" rel="noopener">Falar com a advogada</a>
+      </nav>
+    </div>
+    <div class="progresso" aria-hidden="true"></div>
+  </header>
+
+  <main id="conteudo">
+{{ content }}
+  </main>
+
+  <footer class="rodape">
+    <div class="conteiner">
+      <div>
+        <img src="/img/logo-horizontal-negativo.svg" alt="Marques Tavares Advocacia" width="190" height="46" loading="lazy">
+        <p><strong>Marques Tavares Sociedade Individual de Advocacia</strong></p>
+        <p>Registro OAB/SP nº 46.574 · CNPJ 49.321.533/0001-64</p>
+        <p>Responsável: Dra. Kelly Marques Tavares, OAB/SP 373.424</p>
+      </div>
+      <div>
+        <p><strong>Serviços</strong></p>
+        <p><a href="/casamento.html">Pacto antenupcial e regime de bens</a></p>
+        <p><a href="/analise-pre-compra-de-imovel.html">Análise pré-compra de imóvel</a></p>
+        <p><a href="/divorcio.html">Divórcio e união estável</a></p>
+        <p><a href="/inventario.html">Inventário</a></p>
+        <p><a href="/blog/">Blog</a></p>
+      </div>
+      <div>
+        <p><strong>Contato</strong></p>
+        <p><a href="https://wa.me/5511993757015" target="_blank" rel="noopener">WhatsApp (11) 99375-7015</a></p>
+        <p><a href="https://calendly.com/atendimento-marquestavares/30min" target="_blank" rel="noopener">Agendar conversa online</a></p>
+        <p><a class="rede" href="https://www.instagram.com/kellymtavares.adv/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>@kellymtavares.adv</a></p>
+        <p>Atendimento 100% online</p>
+      </div>
+      <p class="legal">Conteúdo de caráter informativo, conforme o Código de Ética e Disciplina da OAB e o Provimento nº 205/2021. Não substitui a análise individual do seu caso.</p>
+    </div>
+  </footer>
+
+  <a class="whats" href="https://wa.me/5511993757015?text=Ol%C3%A1%2C%20Dra.%20Kelly!%20Vim%20pelo%20site." target="_blank" rel="noopener" aria-label="Conversar pelo WhatsApp">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"/></svg>
+  </a>
+</body>
+</html>

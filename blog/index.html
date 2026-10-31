@@ -1,0 +1,33 @@
+---
+layout: default
+title: Blog
+description: Orientações curtas e em linguagem simples sobre casamento, compra de imóvel, divórcio, inventário e patrimônio da família.
+permalink: /blog/
+---
+    <section class="cab-servico">
+      <div class="conteiner">
+        <span class="rotulo">Blog</span>
+        <h1>Orientações sobre o patrimônio da família</h1>
+        <p class="lead">Textos curtos e em linguagem simples sobre casamento, compra de imóvel, divórcio e herança.</p>
+      </div>
+    </section>
+    <section class="secao" style="padding-top:48px">
+      <div class="conteiner">
+        {% if site.posts.size > 0 %}
+        <ul class="blog-lista">
+          {% for post in site.posts %}
+          <li>
+            <a href="{{ post.url }}">
+              <time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: '%d/%m/%Y' }}</time>
+              <h2>{{ post.title }}</h2>
+              <p>{{ post.description }}</p>
+              <span class="ler">Ler artigo</span>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>Os primeiros artigos estão chegando.</p>
+        {% endif %}
+      </div>
+    </section>

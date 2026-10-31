@@ -1,0 +1,25 @@
+---
+layout: default
+---
+    <div class="conteiner">
+      <p class="migalha"><a href="/">Início</a> / <a href="/blog/">Blog</a></p>
+    </div>
+    <article class="secao" style="padding-top:32px">
+      <div class="conteiner">
+        <div class="post">
+          <span class="rotulo">Blog</span>
+          <h1>{{ page.title }}</h1>
+          <p class="meta">Por Dra. Kelly Marques Tavares, OAB/SP 373.424 · <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%d/%m/%Y' }}</time></p>
+{{ content }}
+          <aside class="post-aviso">
+            <strong>Cada caso tem os seus detalhes.</strong>
+            <p>Este texto é informativo e não substitui a análise do seu caso. Se quiser entender o caminho certo para a sua família, converse comigo.</p>
+            <div class="acoes">
+              <a class="botao" href="https://wa.me/5511993757015?text=Ol%C3%A1%2C%20Dra.%20Kelly!%20Li%20um%20artigo%20do%20blog%20e%20gostaria%20de%20conversar." target="_blank" rel="noopener">Conversar pelo WhatsApp</a>
+              <a class="botao" href="https://calendly.com/atendimento-marquestavares/30min" target="_blank" rel="noopener">Agendar conversa online</a>
+            </div>
+          </aside>
+          <p style="margin-top:32px"><a href="/blog/">← Ver todos os artigos</a></p>
+        </div>
+      </div>
+    </article>

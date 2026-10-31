@@ -1,0 +1,17 @@
+# Configuração do site (GitHub Pages / Jekyll)
+title: Marques Tavares Advocacia
+description: Orientações sobre o patrimônio da família, do casamento à herança.
+url: https://marquestavares.com.br
+lang: pt-BR
+timezone: America/Sao_Paulo
+permalink: /blog/:title/
+markdown: kramdown
+exclude:
+  - COMO-PUBLICAR.md
+  - COMO-ESCREVER-NO-BLOG.md
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post

@@ -1,8 +1,15 @@
+---
+layout: null
+permalink: /sitemap.xml
+---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://marquestavares.com.br/</loc><lastmod>2026-10-31</lastmod></url>
-  <url><loc>https://marquestavares.com.br/inventario.html</loc><lastmod>2026-10-31</lastmod></url>
-  <url><loc>https://marquestavares.com.br/divorcio.html</loc><lastmod>2026-10-31</lastmod></url>
-  <url><loc>https://marquestavares.com.br/analise-pre-compra-de-imovel.html</loc><lastmod>2026-10-31</lastmod></url>
-  <url><loc>https://marquestavares.com.br/casamento.html</loc><lastmod>2026-10-31</lastmod></url>
+  <url><loc>{{ site.url }}/</loc></url>
+  <url><loc>{{ site.url }}/casamento.html</loc></url>
+  <url><loc>{{ site.url }}/analise-pre-compra-de-imovel.html</loc></url>
+  <url><loc>{{ site.url }}/divorcio.html</loc></url>
+  <url><loc>{{ site.url }}/inventario.html</loc></url>
+  <url><loc>{{ site.url }}/blog/</loc></url>
+  {% for post in site.posts %}<url><loc>{{ site.url }}{{ post.url }}</loc><lastmod>{{ post.date | date: '%Y-%m-%d' }}</lastmod></url>
+  {% endfor %}
 </urlset>
