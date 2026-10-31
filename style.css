@@ -378,3 +378,7 @@ p { margin: 0 0 1em; max-width: var(--medida); }
 
 .outras-nota { margin: 20px 0 0; font-size: .95rem; color: var(--cinza); }
 .outras-nota a { font-weight: 600; color: var(--marinho); }
+
+@media (max-width: 1180px) { .menu { gap: 18px; } .menu a { font-size: .9rem; } }
+@media (max-width: 1080px) { .menu .botao { padding: 10px 14px; } .marca img { height: 38px; } }
+#outras-areas { border-top: 1px solid var(--linha); }
