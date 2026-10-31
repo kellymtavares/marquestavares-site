@@ -8,7 +8,7 @@ permalink: /blog/
       <div class="conteiner">
         <span class="rotulo">Blog</span>
         <h1>Orientações sobre o patrimônio da família</h1>
-        <p class="lead">Textos curtos e em linguagem simples sobre casamento, compra de imóvel, divórcio e herança.</p>
+        <p class="lead">Aqui você encontra orientações claras para cuidar do patrimônio da sua família no casamento, na compra do imóvel, no divórcio e na herança.</p>
       </div>
     </section>
     <section class="secao" style="padding-top:48px">
@@ -18,10 +18,17 @@ permalink: /blog/
           {% for post in site.posts %}
           <li>
             <a href="{{ post.url }}">
+              {% if post.imagem %}
+              <img class="miniatura" src="{{ post.imagem }}" alt="" width="480" height="300" loading="lazy">
+              {% else %}
+              <span class="miniatura capa-padrao" aria-hidden="true"><span>MT</span></span>
+              {% endif %}
+              <span class="texto-card">
               <time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: '%d/%m/%Y' }}</time>
               <h2>{{ post.title }}</h2>
               <p>{{ post.description }}</p>
               <span class="ler">Ler artigo</span>
+              </span>
             </a>
           </li>
           {% endfor %}
