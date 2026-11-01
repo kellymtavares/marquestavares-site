@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cadastro | Marques Tavares Advocacia</title>
+  <meta name="description" content="Cadastro para atendimento com a Dra. Kelly Marques Tavares.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1F3864">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { background: var(--papel); }
+    .cad-topo { background: #fff; border-bottom: 1px solid var(--linha); }
+    .cad-topo .conteiner { display: flex; align-items: center; justify-content: space-between; min-height: 72px; gap: 16px; }
+    .cad-topo .seguro { font-size: .85rem; color: var(--cinza); display: flex; align-items: center; gap: 8px; }
+    .cad-topo .seguro svg { width: 16px; height: 16px; }
+
+    .cad { max-width: 760px; margin: 0 auto; padding: 48px 24px 96px; }
+    .cad h1 { font-size: clamp(2rem, 4.4vw, 2.8rem); }
+    .cad .lead { margin-bottom: 32px; }
+
+    .etapas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 0 0 8px; padding: 0; list-style: none; }
+    .etapas li { height: 6px; background: var(--linha); transition: background .4s var(--suave); }
+    .etapas li.feita { background: var(--marinho); }
+    .etapa-nome { font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; color: var(--cinza); margin-bottom: 20px; }
+
+    .cartao { background: #fff; border: 1px solid var(--linha); border-bottom: 6px solid var(--gelo); padding: clamp(24px, 4vw, 40px); }
+    .passo { display: none; }
+    .passo.ativo { display: block; animation: entra .45s var(--suave); }
+    @keyframes entra { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+    .passo h2 { font-size: 1.6rem; margin-bottom: 6px; }
+    .passo > p { color: var(--cinza); margin-bottom: 24px; }
+
+    .grade { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px 16px; }
+    .c6 { grid-column: span 6; } .c4 { grid-column: span 4; } .c3 { grid-column: span 3; } .c2 { grid-column: span 2; }
+    .c1 { grid-column: span 1; }
+    @media (max-width: 640px) { .c4, .c3, .c2 { grid-column: span 6; } .campo.c3:has(#cidade) { grid-column: span 4; } .c1 { grid-column: span 2; } .cad-topo .seguro span { display: none; } }
+
+    .campo label, .campo legend { display: block; font-size: .9rem; font-weight: 600; color: var(--tinta); margin-bottom: 6px; }
+    .campo .dica { font-weight: 400; color: var(--cinza); font-size: .82rem; }
+    .campo input, .campo select, .campo textarea {
+      width: 100%; font: inherit; font-size: 1rem; color: var(--tinta);
+      background: #fff; border: 1px solid var(--linha); border-radius: 0;
+      padding: 12px 14px; transition: border-color .2s, box-shadow .2s;
+    }
+    .campo textarea { min-height: 120px; resize: vertical; }
+    .campo input:focus, .campo select:focus, .campo textarea:focus { outline: none; border-color: var(--marinho); box-shadow: 0 0 0 3px var(--gelo); }
+    .campo.erro input, .campo.erro select, .campo.erro textarea { border-color: #C00000; }
+    .campo .msg { display: none; color: #C00000; font-size: .82rem; margin-top: 4px; }
+    .campo.erro .msg { display: block; }
+    fieldset.campo { border: 0; padding: 0; margin: 0; }
+
+    .opcoes { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+    .opcao { position: relative; }
+    .opcao input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+    .opcao span { display: block; border: 1px solid var(--linha); padding: 16px 18px; background: #fff; transition: border-color .2s, background .2s; cursor: pointer; }
+    .opcao strong { display: block; color: var(--marinho); font-size: 1.02rem; }
+    .opcao small { color: var(--cinza); font-size: .85rem; line-height: 1.4; display: block; margin-top: 2px; }
+    .opcao input:checked + span { border-color: var(--marinho); background: var(--gelo); box-shadow: inset 4px 0 0 var(--marinho); }
+    .opcao input:focus-visible + span { outline: 3px solid var(--azul-medio); outline-offset: 2px; }
+    .opcoes.linha { grid-template-columns: repeat(auto-fit, minmax(84px, 1fr)); gap: 8px; }
+    .opcoes.linha .opcao span { padding: 12px 14px; text-align: center; font-weight: 500; }
+
+    .bloco-assunto { display: none; }
+    .bloco-assunto.ativo { display: contents; }
+
+    .aceite { display: flex; gap: 12px; align-items: flex-start; background: var(--papel); border: 1px solid var(--linha); padding: 16px; font-size: .92rem; }
+    .aceite input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--marinho); flex: none; }
+    .lgpd { font-size: .88rem; color: var(--cinza); }
+    .lgpd p { max-width: none; }
+
+    .navega { display: flex; justify-content: space-between; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+    .botao.claro { background: #fff; color: var(--marinho); border: 1px solid var(--marinho); }
+    [hidden] { display: none !important; }
+    .botao[disabled] { opacity: .6; pointer-events: none; }
+
+    .revisao { display: grid; gap: 4px 16px; grid-template-columns: minmax(140px, 200px) 1fr; font-size: .95rem; margin: 0 0 24px; }
+    .revisao dt { color: var(--cinza); }
+    .revisao dd { margin: 0; font-weight: 500; overflow-wrap: anywhere; }
+
+    .fim { text-align: center; padding: 24px 0; }
+    .fim .selo { width: 64px; height: 64px; margin: 0 auto 20px; background: var(--marinho); color: #fff; display: grid; place-items: center; border-bottom: 6px solid var(--gelo); }
+    .fim .selo svg { width: 30px; height: 30px; }
+    .fim p { margin-left: auto; margin-right: auto; }
+
+    .cad-rodape { text-align: center; font-size: .82rem; color: var(--cinza); padding: 0 24px 40px; }
+    .cad-rodape p { max-width: none; margin: 0; }
+  </style>
+</head>
+<body>
+  <header class="cad-topo">
+    <div class="conteiner">
+      <a href="./" aria-label="Marques Tavares Advocacia, página inicial"><img src="img/logo-horizontal.svg" alt="Marques Tavares Advocacia" width="180" height="44"></a>
+      <span class="seguro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="11" width="16" height="10"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Dados protegidos por sigilo profissional</span></span>
+    </div>
+  </header>
+
+  <main class="cad" id="conteudo">
+    <span class="rotulo">Antes da nossa conversa</span>
+    <h1>Cadastro para atendimento</h1>
+    <p class="lead">Leva cerca de 5 minutos. Com estes dados, a nossa conversa rende mais e os documentos ficam prontos mais rápido.</p>
+
+    <ol class="etapas" aria-hidden="true"><li></li><li></li><li></li><li></li></ol>
+    <p class="etapa-nome" id="etapa-nome">Etapa 1 de 4 · Assunto</p>
+
+    <form class="cartao" id="form" novalidate>
+      <input type="text" name="_site" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+
+      <!-- 1. Assunto -->
+      <section class="passo ativo" data-nome="Assunto">
+        <h2>Como posso ajudar?</h2>
+        <p>Escolha o assunto principal. Se for mais de um, conte na etapa 3.</p>
+        <fieldset class="campo" data-obrigatorio>
+          <legend class="sr-only" style="position:absolute;left:-9999px">Assunto</legend>
+          <div class="opcoes">
+            <label class="opcao"><input type="radio" name="assunto" value="Casamento e pacto antenupcial"><span><strong>Casamento</strong><small>Pacto antenupcial e regime de bens</small></span></label>
+            <label class="opcao"><input type="radio" name="assunto" value="Análise pré-compra de imóvel"><span><strong>Compra de imóvel</strong><small>Análise antes de assinar ou pagar</small></span></label>
+            <label class="opcao"><input type="radio" name="assunto" value="Divórcio"><span><strong>Divórcio</strong><small>Em cartório ou na Justiça</small></span></label>
+            <label class="opcao"><input type="radio" name="assunto" value="Inventário"><span><strong>Inventário</strong><small>Herança e partilha de bens</small></span></label>
+            <label class="opcao"><input type="radio" name="assunto" value="Outro assunto"><span><strong>Outro assunto</strong><small>Consumidor, previdenciário, servidor público e outros</small></span></label>
+          </div>
+          <p class="msg">Escolha uma opção para continuar.</p>
+        </fieldset>
+      </section>
+
+      <!-- 2. Dados pessoais -->
+      <section class="passo" data-nome="Seus dados">
+        <h2>Seus dados</h2>
+        <p>São os dados que vão no contrato e na procuração, então confira com atenção.</p>
+        <div class="grade">
+          <div class="campo c6" data-obrigatorio><label for="nome">Nome completo</label><input id="nome" name="nome" autocomplete="name"><p class="msg">Informe o nome completo.</p></div>
+          <div class="campo c3" data-obrigatorio data-tipo="cpf"><label for="cpf">CPF</label><input id="cpf" name="cpf" inputmode="numeric" placeholder="000.000.000-00"><p class="msg">Confira o CPF.</p></div>
+          <div class="campo c3" data-obrigatorio><label for="rg">RG <span class="dica">e órgão emissor</span></label><input id="rg" name="rg" placeholder="00.000.000-0 SSP/SP"><p class="msg">Informe o RG.</p></div>
+          <div class="campo c6" data-obrigatorio><label for="mae">Nome completo da mãe</label><input id="mae" name="mae"><p class="msg">Informe o nome da mãe.</p></div>
+          <div class="campo c2" data-obrigatorio><label for="nacionalidade">Nacionalidade</label><input id="nacionalidade" name="nacionalidade" value="brasileira"><p class="msg">Informe a nacionalidade.</p></div>
+          <div class="campo c2" data-obrigatorio><label for="estado_civil">Estado civil</label>
+            <select id="estado_civil" name="estado_civil"><option value="">Selecione</option><option>solteiro(a)</option><option>casado(a)</option><option>em união estável</option><option>separado(a)</option><option>divorciado(a)</option><option>viúvo(a)</option></select><p class="msg">Selecione.</p></div>
+          <div class="campo c2" data-obrigatorio><label for="profissao">Profissão</label><input id="profissao" name="profissao"><p class="msg">Informe a profissão.</p></div>
+          <div class="campo c3" data-obrigatorio data-tipo="email"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email"><p class="msg">Confira o e-mail.</p></div>
+          <div class="campo c3" data-obrigatorio data-tipo="tel"><label for="whatsapp">Telefone <span class="dica">de preferência com WhatsApp</span></label><input id="whatsapp" name="whatsapp" inputmode="tel" autocomplete="tel" placeholder="(00) 00000-0000"><p class="msg">Confira o número.</p></div>
+          <fieldset class="campo c6" data-obrigatorio><legend>Como prefere receber os meus contatos?</legend>
+            <div class="opcoes linha">
+              <label class="opcao"><input type="radio" name="contato" value="WhatsApp"><span>WhatsApp</span></label>
+              <label class="opcao"><input type="radio" name="contato" value="E-mail"><span>E-mail</span></label>
+              <label class="opcao"><input type="radio" name="contato" value="Ligação"><span>Ligação</span></label>
+            </div><p class="msg">Escolha uma opção.</p></fieldset>
+          <div class="campo c2" data-obrigatorio data-tipo="cep"><label for="cep">CEP</label><input id="cep" name="cep" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000"><p class="msg">Confira o CEP.</p></div>
+          <div class="campo c4" data-obrigatorio><label for="rua">Endereço <span class="dica">rua, avenida</span></label><input id="rua" name="rua" autocomplete="address-line1"><p class="msg">Informe o endereço.</p></div>
+          <div class="campo c2" data-obrigatorio><label for="numero">Número</label><input id="numero" name="numero"><p class="msg">Informe o número.</p></div>
+          <div class="campo c4"><label for="complemento">Complemento</label><input id="complemento" name="complemento" placeholder="apto, bloco"></div>
+          <div class="campo c2" data-obrigatorio><label for="bairro">Bairro</label><input id="bairro" name="bairro"><p class="msg">Informe o bairro.</p></div>
+          <div class="campo c3" data-obrigatorio><label for="cidade">Cidade</label><input id="cidade" name="cidade" autocomplete="address-level2"><p class="msg">Informe a cidade.</p></div>
+          <div class="campo c1" data-obrigatorio><label for="uf">UF</label><input id="uf" name="uf" maxlength="2" style="text-transform:uppercase"><p class="msg">UF</p></div>
+        </div>
+      </section>
+
+      <!-- 3. Sobre o caso -->
+      <section class="passo" data-nome="Sobre o caso">
+        <h2>Sobre o caso</h2>
+        <p>Conte com as suas palavras. Os detalhes a gente vê na conversa.</p>
+        <div class="grade">
+          <div class="campo c6" data-obrigatorio><label for="relato">O que está acontecendo e do que você precisa?</label><textarea id="relato" name="relato" placeholder="Em poucas linhas, conte a sua situação."></textarea><p class="msg">Escreva algumas linhas sobre o caso.</p></div>
+          <fieldset class="campo c6"><legend>Existe algum prazo ou data importante?</legend>
+            <div class="opcoes linha">
+              <label class="opcao"><input type="radio" name="tem_prazo" value="Sim"><span>Sim</span></label>
+              <label class="opcao"><input type="radio" name="tem_prazo" value="Não"><span>Não</span></label>
+              <label class="opcao"><input type="radio" name="tem_prazo" value="Não sei"><span>Não sei</span></label>
+            </div></fieldset>
+          <div class="campo c6" id="campo-prazo" hidden><label for="prazo">Qual é o prazo ou a data? <span class="dica">ex.: assinatura da escritura em 20/11, audiência, casamento</span></label><input id="prazo" name="prazo"></div>
+          <div class="campo c6"><label for="origem">Como conheceu o escritório?</label>
+            <select id="origem" name="origem"><option value="">Selecione</option><option>Indicação</option><option>Google</option><option>Instagram</option><option>Já sou cliente</option><option>Outro</option></select></div>
+        </div>
+      </section>
+
+      <!-- 4. Confirmação -->
+      <section class="passo" data-nome="Confirmação">
+        <h2>Confira e envie</h2>
+        <p>Se algo estiver errado, volte e corrija.</p>
+        <dl class="revisao" id="revisao"></dl>
+
+        <div class="lgpd">
+          <p><strong>Como os seus dados são usados.</strong> As informações deste cadastro são usadas apenas para analisar o seu caso, preparar o contrato e a procuração e prestar o serviço contratado. Elas ficam guardadas com segurança, sob sigilo profissional, e não são compartilhadas com terceiros, salvo quando necessário para o próprio serviço (por exemplo, cartórios e órgãos públicos). Você pode pedir acesso, correção ou exclusão dos seus dados a qualquer momento pelo WhatsApp (11) 99375-7015, conforme a Lei Geral de Proteção de Dados (Lei 13.709/2018).</p>
+        </div>
+        <label class="aceite campo" data-obrigatorio data-tipo="aceite"><input type="checkbox" name="aceite" value="Sim"><span>Li e concordo com o uso dos meus dados para esta finalidade e confirmo que as informações estão corretas.</span></label>
+        <p class="msg" id="msg-aceite" style="color:#C00000;font-size:.82rem;display:none">Marque a caixa para enviar.</p>
+      </section>
+
+      <!-- Fim -->
+      <section class="passo" id="fim">
+        <div class="fim">
+          <div class="selo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+          <h2>Recebi o seu cadastro</h2>
+          <p>Obrigada! Vou analisar as informações antes da nossa conversa. Se ainda não marcou um horário, escolha o melhor para você.</p>
+          <div class="navega" style="justify-content:center">
+            <a class="botao" href="https://calendly.com/atendimento-marquestavares/30min" target="_blank" rel="noopener">Agendar conversa online</a>
+            <a class="botao claro" href="https://wa.me/5511993757015?text=Ol%C3%A1%2C%20Dra.%20Kelly!%20Acabei%20de%20enviar%20o%20cadastro." target="_blank" rel="noopener">Avisar pelo WhatsApp</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="navega" id="navega">
+        <button type="button" class="botao claro" id="voltar" hidden>Voltar</button>
+        <button type="button" class="botao" id="avancar" style="margin-left:auto">Continuar</button>
+      </div>
+    </form>
+  </main>
+
+  <footer class="cad-rodape">
+    <p>MARQUES TAVARES SOCIEDADE INDIVIDUAL DE ADVOCACIA · OAB/SP 46.574 · CNPJ 49.321.533/0001-64</p>
+    <p>Dra. Kelly Marques Tavares · OAB/SP 373.424</p>
+  </footer>
+
+  <script>
+  // Cole aqui o link do "App da Web" do Google Apps Script (veja COMO-LIGAR-O-CADASTRO.md)
+  const ENDPOINT = "COLE_AQUI_O_LINK_DO_APPS_SCRIPT";
+
+  const form = document.getElementById("form");
+  const passos = [...form.querySelectorAll(".passo:not(#fim)")];
+  const barras = [...document.querySelectorAll(".etapas li")];
+  const nomeEtapa = document.getElementById("etapa-nome");
+  const voltar = document.getElementById("voltar");
+  const avancar = document.getElementById("avancar");
+  let atual = 0;
+
+  // Pré-seleciona o assunto pelo link: cadastro.html?assunto=inventario
+  const mapa = { casamento: 0, imovel: 1, divorcio: 2, inventario: 3, outro: 4 };
+  const pre = new URLSearchParams(location.search).get("assunto");
+  if (pre && pre in mapa) form.querySelectorAll('[name="assunto"]')[mapa[pre]].checked = true;
+
+  function mostrar(i) {
+    passos.forEach((p, n) => p.classList.toggle("ativo", n === i));
+    barras.forEach((b, n) => b.classList.toggle("feita", n <= i));
+    nomeEtapa.textContent = `Etapa ${i + 1} de ${passos.length} · ${passos[i].dataset.nome}`;
+    voltar.hidden = i === 0;
+    avancar.textContent = i === passos.length - 1 ? "Enviar cadastro" : "Continuar";
+    if (i === passos.length - 1) revisar();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  const so = v => v.replace(/\D/g, "");
+  function cpfValido(c) {
+    c = so(c); if (c.length !== 11 || /^(\d)\1+$/.test(c)) return false;
+    for (let t = 9; t < 11; t++) {
+      let s = 0; for (let i = 0; i < t; i++) s += c[i] * (t + 1 - i);
+      if (((s * 10) % 11) % 10 != c[t]) return false;
+    }
+    return true;
+  }
+
+  function validar(passo) {
+    let ok = true;
+    passo.querySelectorAll("[data-obrigatorio]").forEach(c => {
+      let bom;
+      const radios = c.querySelectorAll("input[type=radio]");
+      const chk = c.querySelector("input[type=checkbox]");
+      const el = c.querySelector("input, select, textarea");
+      if (radios.length) bom = [...radios].some(r => r.checked);
+      else if (chk) bom = chk.checked;
+      else {
+        const v = el.value.trim();
+        const t = c.dataset.tipo;
+        bom = v.length > 0;
+        if (bom && t === "cpf") bom = cpfValido(v);
+        if (bom && t === "email") bom = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+        if (bom && t === "tel") bom = so(v).length >= 10;
+        if (bom && t === "cep") bom = so(v).length === 8;
+      }
+      c.classList.toggle("erro", !bom);
+      if (c.dataset.tipo === "aceite") document.getElementById("msg-aceite").style.display = bom ? "none" : "block";
+      if (!bom && ok) { ok = false; (el || c).focus({ preventScroll: true }); c.scrollIntoView({ behavior: "smooth", block: "center" }); }
+    });
+    return ok;
+  }
+
+  function revisar() {
+    const campos = [["Assunto", "assunto"], ["Nome", "nome"], ["CPF", "cpf"], ["RG", "rg"], ["Mãe", "mae"], ["Estado civil", "estado_civil"], ["Profissão", "profissao"], ["E-mail", "email"], ["Telefone", "whatsapp"], ["Prefere contato por", "contato"]];
+    const d = new FormData(form);
+    const end = [d.get("rua"), d.get("numero"), d.get("complemento"), d.get("bairro"), `${d.get("cidade")}/${(d.get("uf") || "").toUpperCase()}`, d.get("cep")].filter(Boolean).join(", ");
+    const linhas = campos.map(([r, n]) => [r, d.get(n)]).concat([["Endereço", end]]);
+    const dl = document.getElementById("revisao");
+    dl.innerHTML = "";
+    linhas.forEach(([r, v]) => { const dt = document.createElement("dt"); dt.textContent = r; const dd = document.createElement("dd"); dd.textContent = v || "—"; dl.append(dt, dd); });
+  }
+
+  async function enviar() {
+    avancar.disabled = true; avancar.textContent = "Enviando…";
+    const d = new FormData(form);
+    if (d.get("_site")) return; // robô
+    d.set("uf", (d.get("uf") || "").toUpperCase());
+    d.delete("_site");
+    try {
+      await fetch(ENDPOINT, { method: "POST", mode: "no-cors", body: new URLSearchParams(d) });
+      passos.forEach(p => p.classList.remove("ativo"));
+      document.getElementById("fim").classList.add("ativo");
+      document.getElementById("navega").hidden = true;
+      barras.forEach(b => b.classList.add("feita"));
+      nomeEtapa.textContent = "Cadastro enviado";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (e) {
+      avancar.disabled = false; avancar.textContent = "Enviar cadastro";
+      alert("Não foi possível enviar agora. Verifique a internet e tente de novo, ou fale comigo pelo WhatsApp (11) 99375-7015.");
+    }
+  }
+
+  avancar.addEventListener("click", () => {
+    if (!validar(passos[atual])) return;
+    if (atual < passos.length - 1) mostrar(++atual); else enviar();
+  });
+  voltar.addEventListener("click", () => { if (atual > 0) mostrar(--atual); });
+  form.addEventListener("change", e => {
+    const c = e.target.closest(".campo.erro"); if (c) c.classList.remove("erro");
+    if (e.target.name === "tem_prazo") document.getElementById("campo-prazo").hidden = e.target.value !== "Sim";
+    if (e.target.name === "assunto" && atual === 0) setTimeout(() => avancar.click(), 250);
+  });
+  form.addEventListener("keydown", e => { if (e.key === "Enter" && e.target.tagName !== "TEXTAREA") { e.preventDefault(); avancar.click(); } });
+
+  // máscaras
+  const mascara = (id, f) => document.getElementById(id).addEventListener("input", e => { e.target.value = f(so(e.target.value)); });
+  mascara("cpf", v => v.slice(0, 11).replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d{1,2})$/, "$1-$2"));
+  mascara("cep", v => v.slice(0, 8).replace(/(\d{5})(\d)/, "$1-$2"));
+  mascara("whatsapp", v => v.slice(0, 11).replace(/^(\d{2})(\d)/, "($1) $2").replace(/(\d)(\d{4})$/, "$1-$2"));
+
+  // busca o endereço pelo CEP
+  document.getElementById("cep").addEventListener("blur", async e => {
+    const c = so(e.target.value); if (c.length !== 8) return;
+    try {
+      const r = await (await fetch(`https://viacep.com.br/ws/${c}/json/`)).json();
+      if (r.erro) return;
+      const set = (id, v) => { const el = document.getElementById(id); if (!el.value && v) { el.value = v; el.closest(".campo").classList.remove("erro"); } };
+      set("rua", r.logradouro); set("bairro", r.bairro); set("cidade", r.localidade); set("uf", r.uf);
+      document.getElementById("numero").focus();
+    } catch (_) {}
+  });
+
+  mostrar(0);
+  </script>
+</body>
+</html>

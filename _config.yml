@@ -9,6 +9,10 @@ markdown: kramdown
 exclude:
   - COMO-PUBLICAR.md
   - COMO-ESCREVER-NO-BLOG.md
+  - COMO-LIGAR-O-CADASTRO.md
+  - cadastro-apps-script.gs
+  - COMO-LIGAR-AS-AVALIACOES.md
+  - avaliacoes-apps-script.gs
 defaults:
   - scope:
       path: ""
