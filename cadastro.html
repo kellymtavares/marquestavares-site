@@ -20,6 +20,10 @@
     .cad-topo .seguro svg { width: 16px; height: 16px; }
 
     .cad { max-width: 760px; margin: 0 auto; padding: 48px 24px 96px; }
+    .quem-atende { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+    .quem-atende img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; flex: none; box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--gelo); }
+    .quem-atende p { margin: 0; font-size: .98rem; color: var(--tinta); line-height: 1.5; }
+    .quem-atende span { display: block; font-size: .82rem; color: var(--cinza); margin-top: 2px; }
     .cad h1 { font-size: clamp(2rem, 4.4vw, 2.8rem); }
     .cad .lead { margin-bottom: 32px; }
 
@@ -100,6 +104,10 @@
   </header>
 
   <main class="cad" id="conteudo">
+    <div class="quem-atende">
+      <img src="img/kelly-avatar.jpg" alt="Dra. Kelly Marques Tavares" width="72" height="72">
+      <p><strong>Oi, eu sou a Kelly.</strong> Sou eu quem vai ler o seu cadastro e cuidar do seu atendimento.<span>Dra. Kelly Marques Tavares · <span style="display:inline;white-space:nowrap">OAB/SP 373.424</span></span></p>
+    </div>
     <span class="rotulo">Antes da nossa conversa</span>
     <h1>Cadastro para atendimento</h1>
     <p class="lead">Leva cerca de 5 minutos. Assim eu já conheço um pouco de você antes da nossa conversa, e ela rende muito mais.</p>
