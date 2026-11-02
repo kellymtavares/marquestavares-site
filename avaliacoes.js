@@ -1,7 +1,7 @@
 /* Avaliações do Google na página inicial.
    Cole abaixo o link do App da Web do Apps Script de avaliações (veja COMO-LIGAR-AS-AVALIACOES.md). */
 (function () {
-  const ENDPOINT = "COLE_AQUI_O_LINK_DO_APPS_SCRIPT_DE_AVALIACOES";
+  const ENDPOINT = "https://script.google.com/macros/s/AKfycbyuGHlkEhWQNceOnFdYMdzUjgEElYprYoTFsyikuq_Kw7Bq2FCivx4N6zSkeo9tNGAm/exec";
   const area = document.getElementById("avaliacoes-lista");
   const resumo = document.getElementById("avaliacoes-resumo");
   if (!area || ENDPOINT.startsWith("COLE")) return;
