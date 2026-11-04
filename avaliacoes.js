@@ -17,7 +17,7 @@
   fetch(ENDPOINT)
     .then(r => r.json())
     .then(d => {
-      if (d.erro || !d.avaliacoes || !d.avaliacoes.length) return;
+      if (!d || d.erro) return;
 
       if (d.nota) {
         resumo.innerHTML = "";
@@ -29,7 +29,7 @@
         resumo.hidden = false;
       }
 
-      d.avaliacoes
+      (d.avaliacoes || [])
         .filter(a => a.texto)
         .forEach(a => {
           const li = document.createElement("li");
